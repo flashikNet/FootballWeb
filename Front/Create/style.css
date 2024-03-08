@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FDFDFF;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    color: #163152;
+}
+
+
+.inputs {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 400px;
+    margin: auto;
+    gap: 15px;
+}
+
+input, select, button{
+    font-size: 24px;
+    height: fit-content;
+    border: 1px solid #163152;
+    border-radius: 4px;
+    color: #163152;
+}
+
+button:hover{
+    background-color: #163152;
+    color: #FDFDFF;
+    cursor: pointer;
+}
+
+header{
+    color: #FDFDFF;
+    margin: 0 0 40px;
+    padding: 20px 55px;
+}
+
+header a{
+    color: #FDFDFF;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #163152;
+    margin: 0;
+    padding: 20px 55px;
+}
+
+select:invalid {
+    color: gray;
+}
+
+option{
+    color: #163152;
+}
+
+main h1{
+    text-align: center;
+    font-size: 50px;
+}

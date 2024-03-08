@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог футболистов 3.0</title>
+</head>
+<body>
+    <header>
+        <h2>Посмотри на них</h2>
+        <h2><a href="/Create/index.html">Добавь нового</a></h2>
+    </header>
+    <main>
+        <h1>Игроки</h1>
+        <ul>
+            <li class = "desciption">
+               <h3 class="header">Имя</h3> 
+               <h3 class="header">Фамилия</h3>
+               <h3 class="header">Пол</h3>
+               <h3 class="header">Дата рождения</h3>
+               <h3 class="header">Команда</h3>
+               <h3 class="header">Страна</h3>
+               <button class="hidden" value="guid">
+                <img src="img/edit.png" alt="edit" width="30px" height="auto">
+                </button>
+            </li>
+        </ul>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="close">&times;</div>
+                    <h2>Измени его</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="inputs">
+            
+                        <input class="value-input" placeholder="Имя" />
+                        <input class="value-input" placeholder="Фамилия" />
+                        <select class="value-input" required >
+                                <option value="" disabled selected hidden>Пол</option>
+                                <option value="Мужской">Мужской</option>
+                                <option value="Женский">Женский</option>
+                        </select>
+                        <input class="value-input" placeholder="Дата рождения" onfocus="(this.type = 'date')" />
+                        <input class="value-input" list="teams" placeholder="Название команды" />
+                            <datalist id="teams">
+                            </datalist>
+                        <select class="value-input" required>
+                            <option value="" disabled selected hidden>Страна</option>
+                            <option value="Россия">Россия</option>
+                            <option value="Италия">Италия</option>
+                            <option value="США">США</option>
+                        </select>
+                        <input class="value-input" type="text" hidden readonly >
+                        <button onclick="Put()">Изменить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <script src="script.js"></script>
+    </footer>
+</body>
+</html>

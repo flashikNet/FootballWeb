@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог футболистов 3.0</title>
+</head>
+<body>
+    <header>
+        <h2>Добавь своего игрока</h2>
+        <h2><a href="/View/index.html">Посмотреть их</a></h2>
+    </header>
+    <main>
+        <h1>Добавь</h1>
+        <div class="inputs">
+            <input class="value-input" placeholder="Имя" />
+            <input class="value-input" placeholder="Фамилия" />
+            <select class="value-input" required >
+                <option value="" disabled selected hidden>Пол</option>
+                <option value="Мужской">Мужской</option>
+                <option value="Женский">Женский</option>
+            </select>
+            <input class="value-input" placeholder="Дата рождения" onfocus="(this.type = 'date')" />
+            <input class="value-input" list="teams" placeholder="Название команды" />
+                <datalist id="teams">
+                </datalist>
+            <select class="value-input" required>
+                <option value="" disabled selected hidden>Страна</option>
+                <option value="Россия">Россия</option>
+                <option value="Италия">Италия</option>
+                <option value="США">США</option>
+            </select>
+            <button onclick="Post()">Добавить</button>
+        </div>
+    </main>
+    <footer>
+        <script src="script.js"></script>
+    </footer>
+</body>
+</html>
