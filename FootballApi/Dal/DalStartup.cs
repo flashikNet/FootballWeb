@@ -11,6 +11,7 @@ namespace Dal
     {
         public static IServiceCollection TryAddDal(this IServiceCollection services)
         {
+            services.TryAddScoped<FootballContext, FootballContext>();
             services.TryAddScoped<IFootballRepository, FootballRepository>();
             return services;
         }

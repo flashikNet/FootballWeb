@@ -7,32 +7,29 @@ namespace Dal.Player.Models
 {
     public class FootballRepository : IFootballRepository
     {
-        public FootballRepository()
+        private FootballContext _db;
+        public FootballRepository(FootballContext db)
         {
-            
+            _db = db;
         }
         public async Task<Guid> CreatePlayerAsync(PlayerDal player, TeamDal team, CountryDal country)
         {
-            using (var db = new FootballContext())
+            await _db.Players.AddAsync(player);
+            if (team is not null)
             {
-                await db.Players.AddAsync(player);
-                if (team is not null)
-                {
-                    await db.Teams.AddAsync(team);
-                }
-                if (country is not null)
-                {
-                    await db.Countries.AddAsync(country);
-                }
-                await db.SaveChangesAsync();
-                return player.Id;
+                await _db.Teams.AddAsync(team);
             }
+            if (country is not null)
+            {
+                await _db.Countries.AddAsync(country);
+            }
+            await _db.SaveChangesAsync();
+            return player.Id;
         }
 
         public async Task<Guid> EditPlayerAsync(PlayerDal editedPlayer, TeamDal team, CountryDal country)
-        {
-            using var db = new FootballContext();
-            var oldPlayer = await db.Players.FindAsync(editedPlayer.Id);
+        { 
+            var oldPlayer = await _db.Players.FindAsync(editedPlayer.Id);
             if (oldPlayer is not null)
             {
                 oldPlayer.Name = editedPlayer.Name;
@@ -44,50 +41,44 @@ namespace Dal.Player.Models
             }
             if (team is not null)
             {
-                await db.Teams.AddAsync(team);
+                await _db.Teams.AddAsync(team);
             }
             if (country is not null)
             {
-                await db.Countries.AddAsync(country);
+                await _db.Countries.AddAsync(country);
             }
-            await db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
             return editedPlayer.Id;
         }
 
         public async Task<CountryDal> GetCountryAsync(Guid countryId)
         {
-            using var db = new FootballContext();
-            return await db.Countries.FindAsync(countryId);
+            return await _db.Countries.FindAsync(countryId);
         }
 
         public async Task<CountryDal> GetCountryByNameAsync(string countryName)
         {
-            using var db = new FootballContext();
-            return await db.Countries.Where(c => c.Name == countryName).FirstOrDefaultAsync();
+            return await _db.Countries.Where(c => c.Name == countryName).FirstOrDefaultAsync();
         }
 
         public async Task<PlayerViewDal[]> GetPlayersAsync()
         {
-            using var db = new FootballContext();
-            return await db.PlayersView.ToArrayAsync();
+            return await _db.PlayersView.ToArrayAsync();
         }
 
         public async Task<TeamDal> GetTeamAsync(Guid teamId)
         {
-            using var db = new FootballContext();
-            return await db.Teams.FindAsync(teamId);
+            return await _db.Teams.FindAsync(teamId);
         }
 
         public async Task<TeamDal> GetTeamByNameAsync(string teamName)
         {
-            using var db = new FootballContext();
-            return await db.Teams.Where(t => t.Name == teamName).FirstOrDefaultAsync();
+            return await _db.Teams.Where(t => t.Name == teamName).FirstOrDefaultAsync();
         }
 
         public async Task<TeamDal[]> GetTeamsAsync()
         {
-            using var db = new FootballContext();
-            return await db.Teams.ToArrayAsync();
+            return await _db.Teams.ToArrayAsync();
         }
     }
 }
