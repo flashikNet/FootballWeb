@@ -1,5 +1,5 @@
-﻿using Logic.Player.Interface;
-using Logic.Player.Models;
+﻿using Application.Interfaces;
+using Application.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -9,7 +9,7 @@ namespace Logic
     {
         public static IServiceCollection TryAddLogic(this IServiceCollection services)
         {
-            services.TryAddScoped<IFootballLogicManager, FootballLogicManager>();
+            services.TryAddScoped<IPlayerService, FootballLogicManager>();
             return services;
         }
     }

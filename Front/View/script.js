@@ -51,6 +51,7 @@ async function loadTeams(){
   teams.forEach(element => {
     const team = document.createElement("option")
     team.value =  element
+    team.innerHTML = element + "55"
     teamsList.appendChild(team)
   });
 }
