@@ -1,3 +1,19 @@
+const countries = {
+  "Russia": "Россия",
+  "Italy": "Италия",
+  "USA": "США",
+  "США":"USA",
+  "Италия":"Italy",
+  "Россия":"Russia"
+
+}
+
+const genders = {
+  "Male": "Мужской",
+  "Female": "Женский",
+  "Женский":"Female",
+  "Мужской":"Male"
+}
 // Get the modal
 const modal = document.getElementById("myModal");
 const btn = document.querySelectorAll(".modal-button");
@@ -7,7 +23,13 @@ async function GetModal(self) {
   const forms = document.querySelectorAll(".value-input")
   const values = document.querySelectorAll(".c"+self.value)
   for (let index = 0; index < values.length; index++) {
-    forms[index].value = values[index].innerHTML;
+    if (index == 2){
+      forms[index].value = genders[values[index].innerHTML];
+    } else if (index == 5){
+      forms[index].value = countries[values[index].innerHTML];
+    } else {
+      forms[index].value = values[index].innerHTML;
+    }
   }
   forms[6].value = self.value;
   modal.style.display = "block";
@@ -26,7 +48,7 @@ window.onclick = function(event) {
 //Send request to edit player
 async function Put()  {
   const doc = document.querySelectorAll(".value-input")
-  await fetch("http://localhost:5117/api/player", {
+  await fetch("http://localhost:5117/api/players/edit", {
       method: "PUT",
       body: JSON.stringify({
           id: doc[6].value,
@@ -34,7 +56,7 @@ async function Put()  {
           surname: doc[1].value,
           sex: doc[2].value,
           birthDate: doc[3].value,
-          team: doc[4].value,
+          teamName: doc[4].value,
           country: doc[5].value
       }),
       headers: {
@@ -45,19 +67,18 @@ async function Put()  {
 }
 
 async function loadTeams(){
-  const resp = await fetch("http://localhost:5117/api/teams");
+  const resp = await fetch("http://localhost:5117/api/teams/get");
   const teams = (await resp.json()).map(st => st["name"]);
   const teamsList = document.getElementById("teams")
   teams.forEach(element => {
     const team = document.createElement("option")
     team.value =  element
-    team.innerHTML = element + "55"
     teamsList.appendChild(team)
   });
 }
 
 async function loadPlayers(){
-  const resp = await (await fetch("http://localhost:5117/api/players")).json();
+  const resp = await (await fetch("http://localhost:5117/api/players/get")).json();
   const list = document.querySelector("ul");
   resp.forEach(element => {
     const listItem = document.createElement("li");
@@ -68,16 +89,16 @@ async function loadPlayers(){
     surname.innerHTML = element["surname"];
     surname.classList.add(`c${element["id"]}`)
     const sex = document.createElement("p");
-    sex.innerHTML = element["sex"];
+    sex.innerHTML = genders[element["sex"]];
     sex.classList.add(`c${element["id"]}`)
     const birthDate = document.createElement("p")
     birthDate.innerHTML = element["birthDate"];
     birthDate.classList.add(`c${element["id"]}`)
     const team = document.createElement("p");
-    team.innerHTML = element["team"];
+    team.innerHTML = element["teamName"];
     team.classList.add(`c${element["id"]}`)
     const country = document.createElement("p");
-    country.innerHTML = element["country"];
+    country.innerHTML = countries[element["country"]];
     country.classList.add(`c${element["id"]}`)
     listItem.appendChild(name);
     listItem.appendChild(surname);

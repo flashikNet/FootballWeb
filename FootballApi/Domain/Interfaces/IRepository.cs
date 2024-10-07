@@ -1,17 +1,41 @@
 ﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-
 
 namespace Domain.Interfaces
 {
     public interface IRepository<T> 
         where T : EntityBase
     {
-        IQueryable<T> GetAll(); // получение всех объектов
-        Task<T> GetAsync(uint id); // получение одного объекта по id
-        void Create(T item); // создание объекта
-        Task UpdateAsync(T item); // обновление объекта
-        void Delete(uint id); // удаление объекта по id
+        /// <summary>
+        /// Получение всех объектов
+        /// </summary>
+        /// <returns></returns>
+        IQueryable<T> GetAll();
+
+        /// <summary>
+        /// Получение одного объекта по id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Объект или null</returns>
+        Task<T?> GetAsync(Guid id);
+
+        /// <summary>
+        /// Создание объекта
+        /// </summary>
+        /// <param name="item">Объект, который требуется добавить</param>
+        /// <returns></returns>
+        Task CreateAsync(T item);
+
+        /// <summary>
+        /// Обновление объекта происходит по id => id менять нельзя
+        /// </summary>
+        /// <param name="item">Обновленный объект</param>
+        /// <returns></returns>
+        Task UpdateAsync(T item);
+
+        /// <summary>
+        /// Удаление объекта по id
+        /// </summary>
+        /// <param name="id"></param>
+        void Delete(Guid id); 
     }
 }

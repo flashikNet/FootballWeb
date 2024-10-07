@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.Enums
+﻿namespace Domain.Enums
 {
     public enum Country
     {
-        Russia,
-        Italy,
-        USA
+        Russia = 0,
+        Italy = 1,
+        USA = 2
     }
 }

@@ -2,9 +2,6 @@ using Application.Models.Request;
 using Application.Models.Response;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Domain.Entities;
-using Microsoft.Extensions.Hosting;
-using System.ComponentModel.DataAnnotations;
 
 namespace PostApi.Controllers
 {
@@ -20,7 +17,7 @@ namespace PostApi.Controllers
             _service = service;
         }
 
-        [Route("players")]
+        [Route("get")]
         [HttpGet]
         [ProducesResponseType<GetPlayerResponse[]>(200)]
         public async Task<IActionResult> GetPlayersAsync()
@@ -30,21 +27,21 @@ namespace PostApi.Controllers
         }
 
         [HttpPost]
-        [Route("player")]
+        [Route("create")]
         [ProducesResponseType<CreatePlayerResponse>(201)]
-        public async Task<IActionResult> CreatePlayerAsync(CreatePlayerRequest dto)
+        public async Task<IActionResult> CreatePlayerAsync(CreatePlayerRequest req)
         {
-            var res = await _service.CreatePlayerAsync(dto);
-            return new ObjectResult(new CreatePlayerResponse(){ Id = res}){ StatusCode = 201};
+            var res = await _service.CreatePlayerAsync(req);
+            return new ObjectResult(res) { StatusCode = 201 };
         }
 
         [HttpPut]
-        [Route("player")]
+        [Route("edit")]
         [ProducesResponseType<CreatePlayerResponse>(200)]
-        public async Task<IActionResult> EditPlayerAsync(EditPlayerRequest dto)
+        public async Task<IActionResult> EditPlayerAsync(EditPlayerRequest req)
         {
-            var res = await _service.EditPlayerAsync(dto);
-            return new ObjectResult(new EditPlayerResponse() { Id = res }) { StatusCode = 200 };
+            var res = await _service.EditPlayerAsync(req);
+            return Ok(res);
         }
     }
 }

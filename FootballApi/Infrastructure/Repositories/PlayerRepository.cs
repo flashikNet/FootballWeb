@@ -2,11 +2,6 @@
 using Domain.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
@@ -14,12 +9,12 @@ namespace Infrastructure.Repositories
     {
         private readonly DbSet<Player> _players = context.Players;
 
-        public void Create(Player item)
+        public async Task CreateAsync(Player item)
         {
-            _players.Add(item);
+            await _players.AddAsync(item);
         }
 
-        public void Delete(uint id)
+        public void Delete(Guid id)
         {
             var player = _players.Find(id);
             if (player is not null)
@@ -33,14 +28,14 @@ namespace Infrastructure.Repositories
             return _players;
         }
 
-        public async Task<Player> GetAsync(uint id)
+        public async Task<Player?> GetAsync(Guid id)
         {
             return await _players.FindAsync(id);
         }
 
-        public void UpdateAsync(Player item)
+        public async Task UpdateAsync(Player item)
         {
-            var old =  _players.Find(item.Id);
+            var old = await _players.FindAsync(item.Id);
             if (old is not null)
             {
                 old.Name = item.Name;
@@ -48,6 +43,7 @@ namespace Infrastructure.Repositories
                 old.Sex = item.Sex;
                 old.Team = item.Team;
                 old.BirthDate = item.BirthDate;
+                old.Country = item.Country;
             }
         }
     }

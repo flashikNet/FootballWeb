@@ -16,7 +16,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        [Route("teams")]
+        [Route("get")]
         [ProducesResponseType<GetTeamResponse[]>(200)]
         public async Task<IActionResult> GetTeamsAsync()
         {

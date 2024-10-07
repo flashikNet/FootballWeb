@@ -2,11 +2,6 @@
 using Domain.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
@@ -14,12 +9,12 @@ namespace Infrastructure.Repositories
     {
         private readonly DbSet<Team> _team = context.Teams;
 
-        public void Create(Team item)
+        public async Task CreateAsync(Team item)
         {
-            _team.Add(item);
+            await _team.AddAsync(item);
         }
 
-        public void Delete(uint id)
+        public void Delete(Guid id)
         {
             var team = _team.Find(id);
             if (team is not null)
@@ -33,7 +28,7 @@ namespace Infrastructure.Repositories
             return _team;
         }
 
-        public async Task<Team> GetAsync(uint id)
+        public async Task<Team?> GetAsync(Guid id)
         {
             return await _team.FindAsync(id);
         }

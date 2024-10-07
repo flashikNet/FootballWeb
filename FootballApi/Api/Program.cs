@@ -1,5 +1,5 @@
-using Dal;
-using Logic;
+using Infrastructure;
+using Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +9,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
-builder.Services.TryAddLogic();
-builder.Services.TryAddDal();
+builder.Services.TryAddInfrastructure();
+builder.Services.TryAddServices();
 
 var app = builder.Build();
 

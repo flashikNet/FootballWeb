@@ -10,21 +10,12 @@ namespace Infrastructure.Data
 
         public FootballContext()
         {
-
+            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=../../DataBase/Football.db");
         }
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<PlayerViewDal>(p =>
-        //    {
-        //        p.HasNoKey();
-        //        p.ToView("PlayersView");
-        //    });
-        //}
     }
 }
