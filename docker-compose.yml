@@ -1,0 +1,22 @@
+services:  
+  api:
+    build:
+      context: ./FootballApi
+      dockerfile: Dockerfile
+    ports:
+      - "5117:8080"
+    volumes:
+      - ./DataBase:/DataBase
+
+  frontend:
+    build:
+      context: ./Front
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./Front/Create:/usr/share/nginx/html/Create
+      - ./Front/View:/usr/share/nginx/html/View
+      - ./Front/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - api
