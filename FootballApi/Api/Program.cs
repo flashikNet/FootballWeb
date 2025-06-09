@@ -4,13 +4,12 @@ using Application;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddCors();
-builder.Services.TryAddInfrastructure();
-builder.Services.TryAddServices();
+builder.Services
+    .AddOpenApi()
+    .AddCors()
+    .TryAddInfrastructure()
+    .TryAddServices()
+    .AddControllers();
 
 var app = builder.Build();
 
@@ -18,13 +17,15 @@ app.UseCors(option => option.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin())
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
+app
+    .UseHttpsRedirection()
+    .UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "OpenAPI V1");
+    });
 
 app.MapControllers();
 
