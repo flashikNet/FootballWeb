@@ -2,7 +2,7 @@
 
 namespace Domain.Interfaces
 {
-    public interface IRepository<T> 
+    public interface IRepository<T>
         where T : EntityBase
     {
         /// <summary>
@@ -36,6 +36,6 @@ namespace Domain.Interfaces
         /// Удаление объекта по id
         /// </summary>
         /// <param name="id"></param>
-        void Delete(Guid id); 
+        void Delete(Guid id);
     }
 }
