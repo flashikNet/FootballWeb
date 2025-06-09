@@ -2,7 +2,9 @@ name: Code Format Check
 
 on:
   push:
-    branches: [ main, master ]
+    branches:
+      - main
+      - release*
   pull_request:
 
 jobs:
