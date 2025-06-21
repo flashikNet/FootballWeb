@@ -9,7 +9,6 @@ namespace PostApi.Controllers
     [Route("/api/players")]
     public class PlayersController : ControllerBase
     {
-
         private readonly IPlayerService _service;
 
         public PlayersController(IPlayerService service)
@@ -17,7 +16,6 @@ namespace PostApi.Controllers
             _service = service;
         }
 
-        [Route("get")]
         [HttpGet]
         [ProducesResponseType<GetPlayerResponse[]>(200)]
         public async Task<IActionResult> GetPlayersAsync()
@@ -27,7 +25,6 @@ namespace PostApi.Controllers
         }
 
         [HttpPost]
-        [Route("create")]
         [ProducesResponseType<CreatePlayerResponse>(201)]
         public async Task<IActionResult> CreatePlayerAsync(CreatePlayerRequest req)
         {
@@ -36,7 +33,6 @@ namespace PostApi.Controllers
         }
 
         [HttpPut]
-        [Route("edit")]
         [ProducesResponseType<CreatePlayerResponse>(200)]
         public async Task<IActionResult> EditPlayerAsync(EditPlayerRequest req)
         {

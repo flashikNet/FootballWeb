@@ -10,13 +10,13 @@ namespace Api.Controllers
     public class TeamsController : ControllerBase
     {
         private readonly ITeamService _service;
+
         public TeamsController(ITeamService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        [Route("get")]
         [ProducesResponseType<GetTeamResponse[]>(200)]
         public async Task<IActionResult> GetTeamsAsync()
         {

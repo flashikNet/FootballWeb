@@ -48,7 +48,7 @@ window.onclick = function(event) {
 //Send request to edit player
 async function Put()  {
   const doc = document.querySelectorAll(".value-input")
-  await fetch("http://localhost:5117/api/players/edit", {
+  await fetch("http://localhost:5117/api/players/", {
       method: "PUT",
       body: JSON.stringify({
           id: doc[6].value,
@@ -67,7 +67,7 @@ async function Put()  {
 }
 
 async function loadTeams(){
-  const resp = await fetch("http://localhost:5117/api/teams/get");
+  const resp = await fetch("http://localhost:5117/api/teams/");
   const teams = (await resp.json()).map(st => st["name"]);
   const teamsList = document.getElementById("teams")
   teams.forEach(element => {
@@ -78,7 +78,7 @@ async function loadTeams(){
 }
 
 async function loadPlayers(){
-  const resp = await (await fetch("http://localhost:5117/api/players/get")).json();
+  const resp = await (await fetch("http://localhost:5117/api/players/")).json();
   const list = document.querySelector("ul");
   resp.forEach(element => {
     const listItem = document.createElement("li");

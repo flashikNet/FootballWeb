@@ -1,6 +1,6 @@
 async function Post()  {
         const doc = document.querySelectorAll(".value-input")
-        await fetch("http://localhost:5117/api/players/create", {
+        await fetch("http://localhost:5117/api/players/", {
             method: "POST",
             body: JSON.stringify({
                 name: doc[0].value,
@@ -19,7 +19,7 @@ async function Post()  {
 }
 
 async function loadTeams(){
-    const resp = await fetch("http://localhost:5117/api/teams/get");
+    const resp = await fetch("http://localhost:5117/api/teams/");
     const teams = (await resp.json()).map(st => st.name);
     
     const teamsList = document.getElementById("teams")
